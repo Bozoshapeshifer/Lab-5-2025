@@ -112,37 +112,58 @@ public class ArrayTabulatedFunction implements TabulatedFunction, Externalizable
 
     }
 
-@Override
-public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null) return false;
-    
-    if (o instanceof TabulatedFunction) {
-        TabulatedFunction other = (TabulatedFunction) o;
+public boolean equals(Object o) 
+{
+    if (this == o) 
+    {
+        return true;
+    }
+
+    if (o == null) {
+        return false;
+    }
+
+    if (o instanceof ArrayTabulatedFunction) 
+        {
+        ArrayTabulatedFunction one = (ArrayTabulatedFunction) o;
         
-        //ArrayTabulatedFunction
-        if (o instanceof ArrayTabulatedFunction) {
-            ArrayTabulatedFunction arrayOther = (ArrayTabulatedFunction) o;
-            if (this.pointsCount != arrayOther.pointsCount) return false;
-            for (int i = 0; i < pointsCount; i++) {
-                if (!this.points[i].equals(arrayOther.points[i])) return false;
-            }
-            return true;
+        if (this.pointsCount != one.pointsCount) 
+        {
+            return false;
         }
         
-        //TabulatedFunction
-        if (this.pointsCount != other.getPointsCount()) return false;
-        
-        for (int i = 0; i < pointsCount; i++) {
-            // Сравниваем координаты x и y через getX и getY
-            if (this.getPointX(i) != other.getPointX(i) || 
-                this.getPointY(i) != other.getPointY(i)) {
+        for (int i = 0; i < pointsCount; i++) 
+            {
+            if (!this.points[i].equals(one.points[i])) 
+            {
+                return false;
+            }
+        }
+        return true;
+    } 
+    else if (o instanceof TabulatedFunction) 
+        {
+        TabulatedFunction one = (TabulatedFunction) o;
+            
+        if (this.getPointsCount() != one.getPointsCount())
+        {
+            return false;
+        }
+            
+        //equals класса FunctionPoint
+        for (int i = 0; i < this.getPointsCount(); i++) 
+            {
+            FunctionPoint thisPoint = new FunctionPoint(this.getPointX(i), this.getPointY(i));
+            FunctionPoint onePoint = new FunctionPoint(one.getPointX(i), one.getPointY(i));
+                
+            if (!thisPoint.equals(onePoint)) 
+            {
                 return false;
             }
         }
         return true;
     }
-    
+        
     return false;
 }
 

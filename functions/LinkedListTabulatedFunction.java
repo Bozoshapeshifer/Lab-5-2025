@@ -348,66 +348,57 @@ public String toString()
 }
 
 @Override
-public boolean equals(Object o)
-{
-    if(this ==o)
-    {
+public boolean equals(Object o) {
+    if (this == o) {
         return true;
     }
 
-    if(o==null)
-    {
+    if (o == null) {
         return false;
     }
 
-    if(o instanceof LinkedListTabulatedFunction)
-    {
+    if (o instanceof LinkedListTabulatedFunction) {
         LinkedListTabulatedFunction one = (LinkedListTabulatedFunction) o;
 
-        if(this.pointsCount!=one.pointsCount)
-        {
+        if (this.pointsCount != one.pointsCount) {
             return false;
         }
 
-        FunctionNode current=this.head.getNext();
-        FunctionNode one_current=one.head.getNext();
+        FunctionNode current = this.head.getNext();
+        FunctionNode one_current = one.head.getNext();
 
-        while (current!=this.head && one_current != one.head) 
-        {
-            if(!current.getPoint().equals(one_current.getPoint()))
+        while (current != this.head && one_current != one.head) {
+            if (!current.getPoint().equals(one_current.getPoint())) {
+                return false;
+            }
+            current = current.getNext();
+            one_current = one_current.getNext();  
+        }
+        return true;
+    } else if (o instanceof TabulatedFunction) {
+        TabulatedFunction one = (TabulatedFunction) o;
+
+        if (this.getPointsCount() != one.getPointsCount()) {
+            return false;
+        }
+
+        
+        for (int i = 0; i < this.getPointsCount(); i++) 
+        { 
+            FunctionPoint thisPoint = new FunctionPoint(this.getPointX(i), this.getPointY(i));
+            FunctionPoint onePoint = new FunctionPoint(one.getPointX(i), one.getPointY(i));
+            if (!thisPoint.equals(onePoint))
             {
                 return false;
+            }
+            
+            
+        }
+        return true;
+    }
 
-            }
-            current=current.getNext();
-            one_current=current.getNext();
-        }
-     return true;   
-    }
-    
-    else if (o instanceof TabulatedFunction) 
-    {
-        TabulatedFunction one = (TabulatedFunction) o;
-            
-        if (this.getPointsCount() != one.getPointsCount()) return false;
-            
-            // Сравниваем все точки по их координатам X и Y
-        for (int i = 0; i < this.getPointsCount(); i++) {
-        double thisX = this.getPointX(i);
-        double thisY = this.getPointY(i);
-        double oneX = one.getPointX(i);
-        double oneY = one.getPointY(i);
-                
-                if (Math.abs(thisX - oneX) > 1e-9 || Math.abs(thisY - oneY) > 1e-9) {
-                    return false;
-                }
-            }
-            
-            return true;
-        }
-        
-        return false;
-    }
+    return false;
+}
 
     @Override
     public int hashCode() {

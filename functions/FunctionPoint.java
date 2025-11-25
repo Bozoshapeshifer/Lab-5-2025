@@ -55,6 +55,7 @@ public class FunctionPoint implements Serializable {
 
      public boolean equals(Object o)
     {
+        double epcilon=1e-9;
         if(this==o)
         {
             return true;
@@ -66,7 +67,7 @@ public class FunctionPoint implements Serializable {
 
         FunctionPoint that = (FunctionPoint) o;
 
-         return Double.compare(that.x, x) == 0 && Double.compare(that.y, y) == 0; 
+         return Math.abs(this.x - that.x) < epcilon && Math.abs(this.y - that.y) < epcilon; 
                
     }
      

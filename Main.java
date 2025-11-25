@@ -28,7 +28,7 @@ public class Main {
             System.out.println("arrayFunc1.equals(arrayFunc2): " + arrayFunc1.equals(arrayFunc2));
             System.out.println("arrayFunc1.equals(arrayFunc3): " + arrayFunc1.equals(arrayFunc3));
             System.out.println("arrayFunc1.equals(null): " + arrayFunc1.equals(null));
-            System.out.println("arrayFunc1.equals(\"строка\"): " + arrayFunc1.equals("ыааауцс"));
+            System.out.println("arrayFunc1.equals(\"строка\"): " + arrayFunc1.equals("SQS"));
             //hashCode()
             System.out.println("\n Тестирование hashCode()");
             System.out.println("arrayFunc1.hashCode(): " + arrayFunc1.hashCode());
